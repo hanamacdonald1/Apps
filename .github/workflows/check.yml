@@ -1,0 +1,27 @@
+name: Check app
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      - name: Check Python syntax
+        run: python -m py_compile app.py
+      - name: Check app starts without Ollama
+        run: |
+          python - <<'PY'
+          from streamlit.testing.v1 import AppTest
+          app = AppTest.from_file("app.py").run(timeout=30)
+          assert not app.exception, app.exception
+          assert app.title[0].value == "✨ Hana AI"
+          PY
