@@ -81,3 +81,13 @@ For a cancellation email: review the source, find the service's official support
 - [Adzuna search](https://developer.adzuna.com/docs/search)
 - [Gmail sending](https://developers.google.com/workspace/gmail/api/guides/sending)
 - [Microsoft Graph sendMail](https://learn.microsoft.com/en-us/graph/api/user-sendmail?view=graph-rest-1.0)
+
+## Native desktop installer
+
+For the standalone app, use **Actions > Build desktop installer > latest successful run > HanaAI-Windows-Installer**. Extract the downloaded artifact and run `HanaAI-Setup.exe`. It installs for your user account and creates a Start Menu shortcut. There is no need to install Python. Ollama/model installation remains separate; Settings provides its official download and a model download button after Ollama is running.
+
+The native app includes its own scheduler, system tray, live updates and Money this week screen. Do not start the legacy Streamlit launcher or separate worker for installed desktop use. Closing the window keeps it in the tray; use the tray's Quit option to exit.
+
+The income agent's minimum is A$100 per project/day, configurable upward. Listings with unknown pay remain separately labelled. You can restrict the view to explicit advertised AUD amounts meeting the target. Business-offer ideas use saved profile skills and remain clearly distinguished from paid listings. Dates, fees and payment timing must be checked in each original opportunity.
+
+The built-in Remotive source requires no key; it only shows geography-compatible labels and retains original source links. Source freshness is 24-hour provider delay plus up to six-hour local cache, not instant vacancy verification. Extra Melbourne-based sources can be connected using Adzuna, RSS/Atom and email.
