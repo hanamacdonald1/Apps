@@ -3,6 +3,7 @@ from hana_ai import income, store
 
 def test_rejects_microtasks_and_unpaid_offers():
     assert income.evaluate_lead({'title': 'UGC shoot AUD 5 per video'}, 100) is None
+    assert income.evaluate_lead({'title': 'UGC shoot $5 per video'}, 100) is None
     assert income.evaluate_lead({'title': 'Unpaid model shoot'}, 100) is None
 
 

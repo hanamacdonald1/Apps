@@ -34,12 +34,15 @@ def evaluate_lead(row, minimum):
     if re.search(r'\b(unpaid|commission.only|pay.to.join|survey rewards|crypto trading|forex trading|gambling)\b', text, re.I):
         return None
     payment = payment_evidence(text)
+    if payment and payment['basis'] in ('shift/day', 'project/booking') and payment['amount'] < 20:
+        return None
     if payment and payment['basis'] in ('shift/day', 'project/booking') and payment['currency'] == 'AUD' and payment['amount'] < minimum:
         return None
     confirmed_target = bool(payment and payment['currency'] == 'AUD' and payment['basis'] in ('shift/day', 'project/booking') and payment['amount'] >= minimum)
     return dict(row, payment=payment, target_evidence=confirmed_target,
         category='Advertised pay meets target' if confirmed_target else 'Pay verification needed',
-        expenses='Unknown: verify before accepting', payment_date='Not stated: check payment terms',
+        expenses='Unknown: verify before accepting', net_before_tax=None,
+        payment_date='Not stated: check payment terms',
         next_action='Check original listing, eligibility, expenses and payment date before applying.',
         checked=datetime.now(timezone.utc).isoformat(), stage='New')
 
