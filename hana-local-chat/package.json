@@ -1,0 +1,16 @@
+{
+  "name": "hana-local-chat",
+  "version": "0.1.0",
+  "description": "A small personal ChatGPT-style app that talks to a local Ollama model.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": { "node": ">=18" },
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  }
+}

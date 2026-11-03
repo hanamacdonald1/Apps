@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hana Local Chat</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="layout">
+    <!-- Sidebar: saved conversations and settings -->
+    <aside class="sidebar" id="sidebar">
+      <h1>Hana Local Chat</h1>
+      <button id="new-chat" class="primary">+ New Chat</button>
+      <ul id="chat-list" class="chat-list"></ul>
+      <div class="settings">
+        <label for="model-input">Ollama model</label>
+        <input id="model-input" type="text" placeholder="e.g. llama3.2" autocomplete="off" />
+        <small>Must already be installed in Ollama.</small>
+      </div>
+    </aside>
+
+    <!-- Main chat area -->
+    <main class="main">
+      <header class="topbar">
+        <button id="menu-toggle" class="icon" aria-label="Show or hide chats">☰</button>
+        <span id="chat-title">New chat</span>
+        <button id="delete-chat" class="danger">Delete Chat</button>
+      </header>
+
+      <div id="messages" class="messages" aria-live="polite"></div>
+
+      <div id="status" class="status" role="status"></div>
+
+      <form id="chat-form" class="composer">
+        <textarea id="message-input" rows="1" placeholder="Type a message... (Enter to send, Shift+Enter for new line)"></textarea>
+        <button id="send" type="submit" class="primary">Send</button>
+      </form>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
