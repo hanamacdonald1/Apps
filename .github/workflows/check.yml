@@ -8,20 +8,17 @@ permissions:
 jobs:
   check:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
+    env:
+      HANA_DATA_DIR: ${{ runner.temp }}/hana-ai-tests
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
-      - run: pip install -r requirements.txt
-      - name: Check Python syntax
-        run: python -m py_compile app.py
-      - name: Check app starts without Ollama
-        run: |
-          python - <<'PY'
-          from streamlit.testing.v1 import AppTest
-          app = AppTest.from_file("app.py").run(timeout=30)
-          assert not app.exception, app.exception
-          assert app.title[0].value == "✨ Hana AI"
-          PY
+          python-version: '3.11'
+          cache: pip
+      - run: python -m pip install -r requirements.txt pytest
+      - name: Compile app and agent modules
+        run: python -m compileall -q app.py worker.py hana_ai
+      - name: Test agents, action controls and dashboard
+        run: python -m pytest -q
