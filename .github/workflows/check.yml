@@ -9,8 +9,6 @@ jobs:
   check:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    env:
-      HANA_DATA_DIR: ${{ runner.temp }}/hana-ai-tests
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
